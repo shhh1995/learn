@@ -10,13 +10,15 @@
         <module name="echo-netty" />
         <module name="echo-util" />
         <module name="demo" />
+        <module name="Threadlearn" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="demo" target="1.8" />
-      <module name="echo-base" target="8" />
-      <module name="echo-netty" target="8" />
-      <module name="echo-util" target="8" />
+      <module name="echo-base" target="1.5" />
+      <module name="echo-netty" target="1.5" />
+      <module name="echo-util" target="1.5" />
+      <module name="Threadlearn" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
