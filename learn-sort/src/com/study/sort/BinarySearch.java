@@ -1,7 +1,5 @@
 package com.study.sort;
 
-import java.util.Arrays;
-
 /**
  * 二分搜索算法（包含递归与非递归）
  */
@@ -19,9 +17,72 @@ public class BinarySearch {
 //        int[] nums = {-2, 0, 1, 4, 7, 9, 10};
 //        int i = firstGreaterThan(nums, 6, 0, nums.length - 1);
 
-        int[] nums = {4, 5, 6, 7, 0, 1, 2}; //经过旋转了的数组
-        int i = binarySearchForRevolve(nums, 7, 0, nums.length - 1);
-        System.out.println(i);
+//        int[] nums = {4, 5, 6, 7, 0, 1, 2}; //经过旋转了的数组
+//        int i = binarySearchForRevolve(nums, 7, 0, nums.length - 1);
+//        System.out.println(i);
+
+        int [][] array = {{1,2,3,4},{5,6,7,8}};
+        find(3,array);
+    }
+
+    public static boolean find(int target, int [][] array) {
+        if(array.length <= 0 || array[0].length <=0) return false;
+
+        //1.先判断是否在数组中
+        if(target < array[0][0] || target > array[array.length -1][array[0].length -1])
+            return false;
+        //法一：遍历
+        /**
+         for(int i = 0; i<array.length; i++){
+         for(int j=0; j<array[i].length; j++){
+         if(target == array[i][j]) return true;
+         }
+         }*/
+
+        //法二：二分查找
+        for(int i = 0; i < array.length; i++){
+            if(findIndex(target, array[i], 0, array[i].length -1) > 0 ){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //通过二分查找的方式
+    public static int findIndex(int target, int[] arr, int low, int high){
+        if(low > high) return -1;
+
+        int middle = low + (high - low)/2;
+
+        if(arr[middle] == target){
+            return middle;
+        }
+
+        if(arr[middle] > target){
+            return findIndex(target, arr, low, middle -1);
+        }else{
+            return findIndex(target, arr, middle + 1, high);
+        }
+
+    }
+
+    //通过二分查找的方式，查找x大于被查找值，x+1小于被查找值, 返回x
+    public int findIndex2(int target, int[] arr, int low, int high){
+        if(low > high) return -1;
+
+        int middle = low + (high - low)/2;
+
+        if(arr[middle] == target || (arr[middle] <= target && arr[middle + 1] >= target)){
+            return middle;
+        }
+
+        if(arr[middle] > target){
+            return findIndex(target, arr, low, middle -1);
+        }else{
+            return findIndex(target, arr, middle -1, high);
+        }
+
     }
 
     /**
